@@ -1,0 +1,50 @@
+label,
+legend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+fieldset label {
+  display: block;
+  margin-top: 0;
+}
+
+em {
+  color: red;
+}
+
+textarea {
+  width: 100%;
+}
+
+dialog {
+  max-width: 50%;
+  margin: auto;
+}
+
+h3 {
+  margin-top: .5em;
+  margin-bottom: 1.5em;
+}
+
+
+.two-column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(1rem);
+}
+
+.three-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(1rem);
+}
+
+input[type="checkbox"] {
+  margin: 15px;
+}
+
+table {
+  margin-bottom: 15px;
+}

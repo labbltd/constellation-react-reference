@@ -1,0 +1,30 @@
+{
+  "name": "constellation-react-reference",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "imask": "7.6.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "signature_pad": "5.1.1",
+    "@labb/dx-engine": "24.2.16",
+    "@labb/constellation-core-types": "24.2.8",
+    "@labb/react-adapter": "24.18.7",
+    "@pega/constellationjs": "24.2.2"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "^5.0.3",
+    "globals": "^16.4.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.7",
+    "vite-plugin-static-copy": "3.1.2"
+  }
+}

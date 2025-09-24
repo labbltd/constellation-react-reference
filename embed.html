@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pega Embed</title>
+</head>
+
+<body>
+    <script>
+        function embedPega(config, node) {
+            node.innerHTML = '';
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = `${config.staticContentUrl}pega-embed.js`;
+            node.appendChild(script);
+
+            const embed = document.createElement('pega-embed');
+            Object.entries(config).forEach(([key, value]) => embed.setAttribute(key, value));
+            embed.id = 'theEmbed';
+            embed.style = 'width:100%';
+            node.appendChild(embed);
+        }
+
+        const config = {
+            pegaServerUrl: 'http://localhost:3333/prweb',
+            staticContentUrl: 'https://release.constellation.pega.com/cs/hotfix-7.2.91-20250717115457/8.24.52-349/react/prod/',
+            authService: 'pega',
+            grantType: 'clientCreds',
+            clientId: '<clientId>',
+            clientSecret: '<clientSecret>',
+            action: 'createCase',
+            caseTypeID: '<caseTypeID>',
+            casePage: 'assignment',
+            appAlias: '<appAlias>'
+        }
+
+        embedPega(config, document.body);
+    </script>
+
+
+</body>
+
+</html>
