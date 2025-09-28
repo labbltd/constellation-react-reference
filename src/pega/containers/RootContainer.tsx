@@ -1,7 +1,7 @@
 import { RootContainer } from '@labb/dx-engine';
 import { GeneratePContainer } from '@labb/react-adapter';
 
-export default function Default(props: { container: RootContainer }) {
+export default function DxRootContainer(props: { container: RootContainer }) {
   return <>
     {props.container.config.httpMessages?.map(message =>
       message.type === 'error' ? <em key={message.message}>

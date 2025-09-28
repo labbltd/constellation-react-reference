@@ -1,7 +1,7 @@
 import { formatters, PContainer } from '@labb/dx-engine';
 import { ChangeEvent, HTMLInputTypeAttribute, useState } from 'react';
 
-export default function TextInput(props: {
+export default function DxTextInput(props: {
   container: PContainer;
 }): JSX.Element {
   const [value, setValue] = useState<any>(props.container.config.value);

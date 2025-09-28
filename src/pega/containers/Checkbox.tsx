@@ -1,7 +1,7 @@
 import { CheckboxProps } from '@labb/constellation-core-types';
 import { PContainer } from '@labb/dx-engine';
 
-export default function Checkbox(props: {
+export default function DxCheckbox(props: {
   container: PContainer<CheckboxProps>;
 }): JSX.Element {
   function getValue(target: EventTarget & HTMLInputElement): boolean {

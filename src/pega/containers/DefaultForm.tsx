@@ -1,7 +1,7 @@
 import { PContainer } from '@labb/dx-engine';
 import { GeneratePContainer } from '@labb/react-adapter';
 
-export default function DefaultForm(props: { container: PContainer }) {
+export default function DxDefaultForm(props: { container: PContainer }) {
   const { container } = props;
   function getClassName() {
     let divClass = 'one-column';

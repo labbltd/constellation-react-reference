@@ -1,6 +1,7 @@
+import { PicklistProps } from '@labb/constellation-core-types';
 import { PContainer } from '@labb/dx-engine';
 
-export default function RadioButtons(props: { container: PContainer }) {
+export default function DxRadioButtons(props: { container: PContainer<PicklistProps> }) {
   function getValue(target: EventTarget | null): string {
     return (target as HTMLInputElement).value;
   }

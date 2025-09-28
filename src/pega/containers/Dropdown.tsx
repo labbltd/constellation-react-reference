@@ -1,6 +1,7 @@
+import { PicklistProps } from '@labb/constellation-core-types';
 import { PContainer } from '@labb/dx-engine';
 
-export default function DxDropdown(props: { container: PContainer }) {
+export default function DxDropdown(props: { container: PContainer<PicklistProps> }) {
   if (props.container.config.readOnly) {
     return <><dt>{props.container.config.label}</dt><dd>{props.container.config.value ?? '--'}</dd></>;
   }

@@ -4,9 +4,10 @@ import { GeneratePContainer } from '@labb/react-adapter';
 import { useEffect, useState } from 'react';
 
 export default function DxFlowContainer(props: { container: FlowContainer }) {
+  const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [todoAssignments, setTodoAssignments] = useState<Assignment[]>([]);
-
+  
   useEffect(() => {
     updateAssignments();
     props.container.updates.subscribe(() => {
@@ -14,8 +15,10 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
     });
   }, []);
 
-  function openAssignment(assignment: Assignment) {
+  async function openAssignment(assignment: Assignment) {
+    setLoading(true);
     props.container.openAssignment(assignment);
+    setLoading(false);
   }
 
   function updateAssignments(): void {
@@ -27,9 +30,13 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
     setErrorMessage(e.message || 'Error');
   }
 
-  function buttonClick(button: ActionButton) {
+  async function buttonClick(button: ActionButton) {
     setErrorMessage(null);
-    props.container.buttonClick(button).catch(handleActionError)
+    setLoading(true);
+    await props.container
+      .buttonClick(button)
+      .catch(e => handleActionError(e));
+    setLoading(false);
   }
 
   return <>
@@ -63,6 +70,9 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
               props.container.getAssignmentName()}
           </h2>
         </legend>
+        {props.container.getValidationErrorMessages().map(message => <em key={message.label}>
+          {message.label} {message.description} <br />
+        </em>)}
         {props.container.children.map((child) => (
           <GeneratePContainer key={child.id} container={child} />
         ))}
@@ -73,6 +83,7 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
             <button
               key={`secondary_${idx}`}
               type="button"
+              disabled={loading}
               onClick={() => buttonClick(button)}
             >
               {button.name}
@@ -82,6 +93,7 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
             <button
               key={`main_${idx}`}
               type="button"
+              disabled={loading}
               onClick={() => buttonClick(button)}
             >
               {button.name}

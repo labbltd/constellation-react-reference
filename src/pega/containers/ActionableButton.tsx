@@ -1,6 +1,13 @@
 import { PContainer } from "@labb/dx-engine";
 
-export default function DxActionableButton(props: { container: PContainer }) {
+interface ActionableButtonProps {
+    localAction: string;
+    value: string;
+    label: string;
+    visibility: boolean;
+}
+
+export default function DxActionableButton(props: { container: PContainer<ActionableButtonProps> }) {
     const { container } = props;
 
     function performAction() {

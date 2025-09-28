@@ -2,7 +2,7 @@ import { Task } from "@labb/constellation-core-types";
 import { PContainer } from "@labb/dx-engine";
 import { useState } from "react";
 
-export default function Todo(props: { container: PContainer }) {
+export default function DxTodo(props: { container: PContainer }) {
     const [expanded, setExpanded] = useState(false);
     const tasks: Task[] = expanded ?
         props.container.config.datasource.source :

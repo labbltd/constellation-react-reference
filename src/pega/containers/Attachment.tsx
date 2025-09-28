@@ -1,8 +1,8 @@
-import { FileStatus, Attachment as PAttachment } from '@labb/dx-engine';
+import { Attachment, FileStatus } from '@labb/dx-engine';
 import { useRef, useState } from 'react';
 
-export default function Attachment(props: {
-  container: PAttachment;
+export default function DxAttachment(props: {
+  container: Attachment;
 }): JSX.Element {
   const [downloadedImage, setDownloadedImage] = useState<string | undefined>();
   const { container } = props;
