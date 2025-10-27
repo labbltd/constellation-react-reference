@@ -12,7 +12,7 @@ The application is built on the following libraries:
 
 ## Development server
 
-Run `npm run dev` for a dev server. Navigate to [http://localhost:5173/](http://localhost:5173) to view the application.
+Run `npm run dev` for a dev server. Navigate to [http://localhost:5173/](http://localhost:5173) to view the React Reference application.
 
 The project is configured to communicate with a Pega mocking server running on `localhost:3333` but can be changed to talk directly to a live Pega Infinity server.
 

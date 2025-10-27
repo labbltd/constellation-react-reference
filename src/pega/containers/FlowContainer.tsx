@@ -13,6 +13,16 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
     props.container.updates.subscribe(() => {
       updateAssignments();
     });
+    window.history.pushState(null, '', window.location.href);
+    window.onpopstate = function onPopState() {
+      const backButton = props.container.actionButtons?.secondary.find(button => button.actionID === 'back');
+      if (backButton) {
+        window.history.go(1);
+        props.container.buttonClick(backButton);
+      } else {
+        window.history.go(-1);
+      }
+    };
   }, []);
 
   async function openAssignment(assignment: Assignment) {
@@ -27,7 +37,7 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
 
   function handleActionError(e: Error) {
     console.error(e);
-    setErrorMessage(e.message || 'Error');
+    setErrorMessage(e?.message || 'Error');
   }
 
   async function buttonClick(button: ActionButton) {
@@ -43,6 +53,11 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
     {props.container.config.caseMessages?.map(message =>
       <div key={message}>
         {message}
+      </div>
+    )}
+    {props.container.config.pageMessages?.map(message =>
+      <div key={message.message}>
+        {message.type}: {message.message}
       </div>
     )}
     {!props.container.hasAssignment() && <>

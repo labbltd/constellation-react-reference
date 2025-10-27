@@ -39,5 +39,6 @@ export default function DxSimpleTableManual(props: { container: SimpleTableManua
         </tbody>
       </table>
     }
+    {container.config.allowActions?.allowAdd && <button type="button" onClick={() => container.addRow()}>Add Row</button>}
   </>
 }

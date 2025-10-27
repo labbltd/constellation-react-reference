@@ -4,7 +4,7 @@ import { TokenInfo } from '@labb/constellation-core-types';
 import { OAuth2Service } from '@labb/dx-engine';
 import { PegaEmbed } from '@labb/react-adapter';
 import { useEffect, useState } from 'react';
-import { config } from './config';
+import config from './config';
 
 import './pega/ContainerMapping';
 
@@ -54,11 +54,21 @@ function Main() {
         {token && <PegaEmbed
             deployUrl='/'
             caseTypeID={config.caseTypeId}
+            startingFields={config.startingFields}
+            caseID={config.caseId}
+            assignmentID={config.assignmentId}
+            casePage={config.casePage}
+            pageID={config.pageId}
+            className={config.className}
+            appID={config.appId}
             infinityServer={config.infinityServer}
             token={token}
             authConfig={config}
             loadingDone={status => {
                 setLoadingStatus(status);
+                if (config.xray) {
+                    window.PCore.getDebugger().toggleXRay(true);
+                }
             }}
         />}
         {(!token && !authError) && <h1>Authentication in progress</h1>}

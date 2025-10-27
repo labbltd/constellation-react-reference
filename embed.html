@@ -8,35 +8,78 @@
 </head>
 
 <body>
-    <script>
-        function embedPega(config, node) {
-            node.innerHTML = '';
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = `${config.staticContentUrl}pega-embed.js`;
-            node.appendChild(script);
+    <script type="module">
+        import config from '/src/config';
 
+        function embedPega(config, node) {
+            sessionStorage.clear();
+            node.innerHTML = '';
+            if (typeof PEGA_EMBED === 'undefined') {
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = `${config.staticContentUrl}pega-embed.js`;
+                node.appendChild(script);
+            }
             const embed = document.createElement('pega-embed');
-            Object.entries(config).forEach(([key, value]) => embed.setAttribute(key, value));
+            Object.entries(config)
+                .filter(([_, value]) => value != undefined)
+                .forEach(([key, value]) => embed.setAttribute(key, value));
             embed.id = 'theEmbed';
             embed.style = 'width:100%';
+
+            embed.addEventListener("embedassignmentopened", console.log);
+            embed.addEventListener("embedassignmentsubmission", console.log);
+            embed.addEventListener("embedauthfail", console.log);
+            embed.addEventListener("embedcaseopened", console.log);
+            embed.addEventListener("embedcaseclosed", console.log);
+            embed.addEventListener("embedcloseconfirmview", console.log);
+            embed.addEventListener("embedcustom", console.log);
+            embed.addEventListener("embedeventcancel", console.log);
+            embed.addEventListener("embedprocessingend", console.log);
+            embed.addEventListener("embedready", console.log);
+            embed.addEventListener("embedreauth", console.log);
+
             node.appendChild(embed);
         }
 
-        const config = {
-            pegaServerUrl: 'http://localhost:3333/prweb',
-            staticContentUrl: 'https://release.constellation.pega.com/cs/hotfix-7.2.91-20250717115457/8.24.52-349/react/prod/',
-            authService: 'pega',
-            grantType: 'clientCreds',
-            clientId: '<clientId>',
-            clientSecret: '<clientSecret>',
-            action: 'createCase',
-            caseTypeID: '<caseTypeID>',
-            casePage: 'assignment',
-            appAlias: '<appAlias>'
-        }
+        // https://docs.pega.com/bundle/platform/page/platform/user-experience/attributes-web-embed.html
+        embedPega({
+            pegaServerUrl: config.infinityServer,
+            staticContentUrl: config.staticContentUrl,
+            tokenUri: config.accessTokenUrl,
+            authorizeUri: config.authUrl,
+            revokeUri: config.revokeUrl,
+            authService: config.authService,
+            grantType: config.grantType,
+            clientId: config.clientId,
+            clientSecret: config.clientSecret,
+            action: config.action,
+            caseTypeID: config.caseTypeId,
+            caseID: config.caseId,
+            assignmentID: config.assignmentId,
+            pageID: config.pageId,
+            pageClass: config.className,
+            casePage: {
+                'pyEmbedAssignment': "assignment",
+                'pyEmbedAssignmentWithStages': "assignmentWithStages",
+                'pyDetails': "full",
+                'pySimplifiedAssignment': "simplifiedAssignment"
+            }[config.casePage || 'pyEmbedAsignment'],
+            appAlias: config.appId,
+            assignmentHeader: config.assignmentHeader,
+            startingFields: JSON.stringify(config.startingFields),
+            theme: JSON.stringify(config.theme),
+            themeID: config.themeID,
+        }, document.body);
 
-        embedPega(config, document.body);
+        if (config.xray) {
+            const intervalId = setInterval(() => {
+                if (window.PCore) {
+                    clearInterval(intervalId);
+                    PCore.getDebugger().toggleXRay(true)
+                }
+            }, 100);
+        }
     </script>
 
 

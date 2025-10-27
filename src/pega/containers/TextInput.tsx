@@ -120,9 +120,7 @@ export default function DxTextInput(props: {
       inputMode={inputmode()}
       step={step()}
       value={value}
-      readOnly={props.container.config.readOnly}
-      disabled={props.container.config.readOnly}
-      required={props.container.config.required}
+      disabled={props.container.config.disabled}
       onChange={e => change(e)}
       onBlur={e => blur(e)}
     />
