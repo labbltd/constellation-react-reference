@@ -9,7 +9,7 @@ export default function DxCheckbox(props: {
   }
 
   if (props.container.config.readOnly) {
-    return <><dt>{props.container.config.caption}</dt><dd>{props.container.config.value ? props.container.config.trueLabel : props.container.config.falseLabel}</dd></>;
+    return <><dt>{props.container.config.caption}</dt>{!props.container.config.hideLabel && <dd>{props.container.config.value ? props.container.config.trueLabel : props.container.config.falseLabel}</dd>}</>;
   }
 
   return <>

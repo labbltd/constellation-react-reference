@@ -16,6 +16,7 @@ DxReactAdapter.registerMapping('ModalViewContainer', React.lazy(() => import('./
 DxReactAdapter.registerMapping('SimpleTableManual', React.lazy(() => import('./containers/SimpleTableManual')));
 DxReactAdapter.registerMapping('View', React.lazy(() => import('./containers/View')));
 DxReactAdapter.registerMapping('FieldGroupListItem', React.lazy(() => import('./containers/FieldGroupListItem')));
+DxReactAdapter.registerMapping('SimpleTable', React.lazy(() => import('./containers/SimpleTable')));
 
 // controls
 DxReactAdapter.registerMapping('AutoComplete', React.lazy(() => import('./containers/Dropdown')));

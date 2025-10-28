@@ -12,8 +12,11 @@ export default function DxDropdown(props: { container: Dropdown }) {
     </label>
     {props.container.config.validatemessage && <em>{props.container.config.validatemessage}</em>}
     <select
-      onChange={(e) => props.container.updateFieldValue(e.target.value)}
-      onBlur={(e) => props.container.triggerFieldChange(e.target.value)}
+      id={props.container.id}
+      onChange={(e) => {
+        props.container.updateFieldValue(e.target.value);
+        props.container.triggerFieldChange(e.target.value);
+      }}
       disabled={props.container.config.disabled}
       value={props.container.config.value}
     >

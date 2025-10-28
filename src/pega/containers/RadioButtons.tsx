@@ -21,12 +21,10 @@ export default function DxRadioButtons(props: { container: PContainer<PicklistPr
         (option: { key: string; value: string }) => <label key={option.key}>
           <input
             type="radio"
-            onChange={(e) =>
-              props.container.updateFieldValue(getValue(e.target))
-            }
-            onBlur={(e) =>
-              props.container.triggerFieldChange(getValue(e.target))
-            }
+            onChange={(e) => {
+              props.container.updateFieldValue(getValue(e.target));
+              props.container.triggerFieldChange(getValue(e.target));
+            }}
             checked={props.container.config.value === option.key}
             name={props.container.id}
             id={`${props.container.id}.${option.key}`}
