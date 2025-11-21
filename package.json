@@ -13,8 +13,8 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "signature_pad": "5.1.1",
-    "@labb/dx-engine": "24.2.24",
-    "@labb/constellation-core-types": "24.2.12",
+    "@labb/dx-engine": "24.2.30",
+    "@labb/constellation-core-types": "24.2.14",
     "@labb/react-adapter": "24.18.9",
     "@pega/constellationjs": "24.2.2"
   },

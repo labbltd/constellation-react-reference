@@ -1,13 +1,13 @@
 import { ActionButton } from "@labb/constellation-core-types";
 import { ModalViewContainer } from "@labb/dx-engine";
 import { GeneratePContainer } from "@labb/react-adapter";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function DxModalViewContainer(props: { container: ModalViewContainer }) {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { container } = props;
-    const dialog = useRef(null);
+    const dialog = useRef<HTMLDialogElement>(null);
 
     async function buttonClick(button: ActionButton): Promise<void> {
         try {
@@ -20,6 +20,21 @@ export default function DxModalViewContainer(props: { container: ModalViewContai
         }
         setLoading(false);
     }
+
+    useEffect(() => {
+        props.container.updates.subscribe(() => {
+            if (!dialog.current) return;
+            if (props.container.hasContainerItems()) {
+                if (!dialog.current.open) {
+                    dialog.current.showModal();
+                }
+            } else {
+                if (dialog.current.open) {
+                    dialog.current.close();
+                }
+            }
+        })
+    }, [])
 
     return <dialog ref={dialog}>
         <h3>{container.heading}</h3>

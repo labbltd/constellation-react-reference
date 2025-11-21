@@ -23,8 +23,8 @@ export default function DxDropdown(props: { container: Dropdown }) {
       <option value="" disabled={props.container.config.required}>
         Select...
       </option>
-      {props.container.listItems?.map((option) => (
-        <option key={option.key} value={option.key}>
+      {props.container.listItems?.map((option, idx) => (
+        <option key={idx + option.key!} value={option.key}>
           {option.value}
         </option>
       ))}

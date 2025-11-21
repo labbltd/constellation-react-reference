@@ -35,16 +35,25 @@ export default function DxAttachment(props: {
     {
       container.files.length > 0 &&
       <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Type</th>
+            <th>Progress</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
         <tbody>
           {container.files.map(file =>
             <tr key={file.id}>
               <td>{file.name}</td>
-              <td>{container.formatBytes(file.size!)}</td>
+              <td>{file.size ? container.formatBytes(file.size) : '--'}</td>
               <td>{file.type}</td>
               <td>{file.progress}%</td>
               <td>
                 <button type="button" onClick={() => container.removeFile(file.id)}>Delete</button>
-                {file.type.startsWith('image') && <button type="button" onClick={async () => preview(file)}>Preview</button>}
+                {file.type?.startsWith('image') && <button type="button" onClick={async () => preview(file)}>Preview</button>}
               </td>
             </tr>
           )}

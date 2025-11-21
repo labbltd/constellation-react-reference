@@ -19,7 +19,7 @@ DxReactAdapter.registerMapping('FieldGroupListItem', React.lazy(() => import('./
 DxReactAdapter.registerMapping('SimpleTable', React.lazy(() => import('./containers/SimpleTable')));
 
 // controls
-DxReactAdapter.registerMapping('AutoComplete', React.lazy(() => import('./containers/Dropdown')));
+DxReactAdapter.registerMapping('AutoComplete', React.lazy(() => import('./containers/AutoComplete')));
 DxReactAdapter.registerMapping('Attachment', React.lazy(() => import('./containers/Attachment')));
 DxReactAdapter.registerMapping('Checkbox', React.lazy(() => import('./containers/Checkbox')));
 DxReactAdapter.registerMapping('Currency', React.lazy(() => import('./containers/TextInput')));
@@ -41,6 +41,7 @@ DxReactAdapter.registerMapping('Time', React.lazy(() => import('./containers/Tex
 
 // custom controls
 DxReactAdapter.registerMapping('Pega_Extensions_PasswordInput', React.lazy(() => import('./containers/TextInput')));
+DxReactAdapter.registerMapping('Cmc_Extensions_GuidedTextInput', React.lazy(() => import('./containers/TextInput')));
 DxReactAdapter.registerMapping('Pega_Extensions_ActionableButton', React.lazy(() => import('./containers/ActionableButton')));
 DxReactAdapter.registerMapping('Pega_Extensions_MaskedInput', React.lazy(() => import('./containers/MaskedInput')));
 DxReactAdapter.registerMapping('Pega_Extensions_SignatureCapture', React.lazy(() => import('./containers/SignatureCapture')));

@@ -4,7 +4,7 @@ import { TokenInfo } from '@labb/constellation-core-types';
 import { OAuth2Service } from '@labb/dx-engine';
 import { PegaEmbed } from '@labb/react-adapter';
 import { useEffect, useState } from 'react';
-import config from './config';
+import { config } from './pega/embed-config';
 
 import './pega/ContainerMapping';
 
