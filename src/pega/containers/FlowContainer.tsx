@@ -7,7 +7,7 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [todoAssignments, setTodoAssignments] = useState<Assignment[]>([]);
-  
+
   useEffect(() => {
     updateAssignments();
     props.container.updates.subscribe(() => {
@@ -55,11 +55,6 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
         {message}
       </div>
     )}
-    {props.container.config.pageMessages?.map(message =>
-      <div key={message.message}>
-        {message.type}: {message.message}
-      </div>
-    )}
     {!props.container.hasAssignment() && <>
       {todoAssignments.map(assignment =>
         <div key={assignment.ID}>
@@ -71,13 +66,20 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
       {todoAssignments.length === 0 && <p>Thank you for your request. We will contact you as soon as possible.</p>}
     </>}
     {props.container.hasAssignment() && <form>
-      <ul>
-        {props.container.navigation?.steps.map((step, i) => (
-          <li key={`first_${i}`}>
-            {step.name} ({step.ID}: {step.visited_status})
-          </li>
-        ))}
-      </ul>
+      {props.container.navigation && <nav>
+        <ol>
+          {props.container.navigation?.steps.map((step, i) => (
+            <li key={`first_${i}`}>
+              {step.name} ({step.ID}: {step.visited_status})
+            </li>
+          ))}
+        </ol>
+      </nav>}
+      {props.container.config.pageMessages?.map(message =>
+        <div key={message.message}>
+          {message.type}: {message.message}
+        </div>
+      )}
       <fieldset>
         <legend>
           <h2>
@@ -91,6 +93,11 @@ export default function DxFlowContainer(props: { container: FlowContainer }) {
         {props.container.children.map((child) => (
           <GeneratePContainer key={child.id} container={child} />
         ))}
+        {props.container.config.httpMessages?.map(message =>
+          <div>
+            {message.type}: {message.message}
+          </div>
+        )}
       </fieldset>
       {props.container.actionButtons && (
         <>

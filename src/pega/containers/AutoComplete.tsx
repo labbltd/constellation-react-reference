@@ -19,7 +19,6 @@ export default function DxAutocomplete(props: {
     if (items.length === 0) {
       const name = (props.container.config.fieldMetadata as any)?.datasource?.name || props.container.config.datasource;
       if (name) {
-        console.log(props.container.config.fieldMetadata)
         const parameters = (props.container.config.fieldMetadata as any)?.datasource?.parameters || [];
         const dataPageParams = parameters.reduce((acc: any, param: any) => ({
           ...acc,

@@ -1,3 +1,21 @@
+@import './classless.css';
+
+label {
+  display: block;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(1rem);
+}
+
+.three-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(1rem);
+}
+
 label,
 legend {
   display: flex;
@@ -26,25 +44,4 @@ dialog {
 h3 {
   margin-top: .5em;
   margin-bottom: 1.5em;
-}
-
-
-.two-column {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: calc(1rem);
-}
-
-.three-column {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: calc(1rem);
-}
-
-input[type="checkbox"] {
-  margin: 15px;
-}
-
-table {
-  margin-bottom: 15px;
 }
